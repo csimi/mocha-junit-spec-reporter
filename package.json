@@ -1,5 +1,5 @@
 {
-  "name": "mocha-junit-reporter",
+  "name": "mocha-junit-spec-reporter",
   "version": "2.2.1",
   "description": "A JUnit reporter for mocha.",
   "main": "index.js",
@@ -13,6 +13,9 @@
     "type": "git",
     "url": "https://github.com/michaelleeallen/mocha-junit-reporter"
   },
+  "files": [
+    "index.js"
+  ],
   "keywords": [
     "mocha",
     "junit",

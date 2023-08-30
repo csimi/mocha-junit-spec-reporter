@@ -1,42 +1,41 @@
-# JUnit Reporter for Mocha
+# JUnit Spec Reporter for Mocha
 
-[![Build Status][travis-badge]][travis-build]
 [![npm][npm-badge]][npm-listing]
 
-Produces JUnit-style XML test results.
+Produces JUnit-style XML test results with an option to output Spec to console.
 
 ## Installation
 
 ```shell
-$ npm install mocha-junit-reporter --save-dev
+$ npm install mocha-junit-spec-reporter --save-dev
 ```
 
 or as a global module
 ```shell
-$ npm install -g mocha-junit-reporter
+$ npm install -g mocha-junit-spec-reporter
 ```
 
 ## Usage
-Run mocha with `mocha-junit-reporter`:
+Run mocha with `mocha-junit-spec-reporter`:
 
 ```shell
-$ mocha test --reporter mocha-junit-reporter
+$ mocha test --reporter mocha-junit-spec-reporter
 ```
 This will output a results file at `./test-results.xml`.
 You may optionally declare an alternate location for results XML file by setting
 the environment variable `MOCHA_FILE` or specifying `mochaFile` in `reporterOptions`:
 
 ```shell
-$ MOCHA_FILE=./path_to_your/file.xml mocha test --reporter mocha-junit-reporter
+$ MOCHA_FILE=./path_to_your/file.xml mocha test --reporter mocha-junit-spec-reporter
 ```
 or
 ```shell
-$ mocha test --reporter mocha-junit-reporter --reporter-options mochaFile=./path_to_your/file.xml
+$ mocha test --reporter mocha-junit-spec-reporter --reporter-options mochaFile=./path_to_your/file.xml
 ```
 or
 ```javascript
 var mocha = new Mocha({
-    reporter: 'mocha-junit-reporter',
+    reporter: 'mocha-junit-spec-reporter',
     reporterOptions: {
         mochaFile: './path_to_your/file.xml'
     }
@@ -62,12 +61,12 @@ You can also add properties to the report under `testsuite`. This is useful if y
 
 To do so pass them in via env variable:
 ```shell
-PROPERTIES=BUILD_ID:4291 mocha test --reporter mocha-junit-reporter
+PROPERTIES=BUILD_ID:4291 mocha test --reporter mocha-junit-spec-reporter
 ```
 or
 ```javascript
 var mocha = new Mocha({
-    reporter: 'mocha-junit-reporter',
+    reporter: 'mocha-junit-spec-reporter',
     reporterOptions: {
         properties: {
             BUILD_ID: 4291
@@ -78,7 +77,7 @@ var mocha = new Mocha({
 
 ### Results Report
 
-Results XML filename can contain `[hash]`, e.g. `./path_to_your/test-results.[hash].xml`. `[hash]` is replaced by MD5 hash of test results XML. This enables support of parallel execution of multiple `mocha-junit-reporter`'s writing test results in separate files. In addition to this these placeholders can also be used:
+Results XML filename can contain `[hash]`, e.g. `./path_to_your/test-results.[hash].xml`. `[hash]` is replaced by MD5 hash of test results XML. This enables support of parallel execution of multiple `mocha-junit-spec-reporter`'s writing test results in separate files. In addition to this these placeholders can also be used:
 
 | placeholder         | output                                            |
 | ------------------- | ------------------------------------------------- |
@@ -91,7 +90,7 @@ Results XML filename can contain `[hash]`, e.g. `./path_to_your/test-results.[ha
 In order to display full suite title (including parents) just specify `testsuitesTitle` option
 ```javascript
 var mocha = new Mocha({
-    reporter: 'mocha-junit-reporter',
+    reporter: 'mocha-junit-spec-reporter',
     reporterOptions: {
         testsuitesTitle: true,
         suiteTitleSeparatedBy: '.' // suites separator, default is space (' '), or period ('.') in jenkins mode
@@ -103,7 +102,7 @@ If you want to **switch classname and name** of the generated testCase XML entri
 
 ```javascript
 var mocha = new Mocha({
-    reporter: 'mocha-junit-reporter',
+    reporter: 'mocha-junit-spec-reporter',
     reporterOptions: {
         testCaseSwitchClassnameAndName: true
     }
@@ -193,6 +192,7 @@ output line 2
 | includePending                 | `false`                | if set to a truthy value pending tests will be included in the report                                                   |
 | properties                     | `null`                 | a hash of additional properties to add to each test suite                                                               |
 | toConsole                      | `false`                | if set to a truthy value the produced XML will be logged to the console                                                 |
+| spec                           | `false`                | if set to a truthy value results will be logged to the console by inheriting from the Spec reporter                     |
 | useFullSuiteTitle              | `false`                | if set to a truthy value nested suites' titles will show the suite lineage                                              |
 | suiteTitleSeparatedBy          | ` ` (space)            | the character to use to separate nested suite titles. (defaults to ' ', '.' if in jenkins mode)                         |
 | testCaseSwitchClassnameAndName | `false`                | set to a truthy value to switch name and classname values                                                               |
@@ -205,8 +205,6 @@ output line 2
 | jenkinsMode                    | `false`                | if set to truthy value will return xml that will display nice results in Jenkins                                        |
 | jenkinsClassnamePrefix         | `undefined`            | adds a prefix to a classname when running  in `jenkinsMode`                                                             |
 
-[travis-badge]: https://travis-ci.org/michaelleeallen/mocha-junit-reporter.svg?branch=master
-[travis-build]: https://travis-ci.org/michaelleeallen/mocha-junit-reporter
-[npm-badge]: https://img.shields.io/npm/v/mocha-junit-reporter.svg?maxAge=2592000
-[npm-listing]: https://www.npmjs.com/package/mocha-junit-reporter
+[npm-badge]: https://img.shields.io/npm/v/mocha-junit-spec-reporter.svg?maxAge=2592000
+[npm-listing]: https://www.npmjs.com/package/mocha-junit-spec-reporter
 [ant-schema]: http://windyroad.org/dl/Open%20Source/JUnit.xsd
